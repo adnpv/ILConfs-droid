@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Mis Eventos</title>
+
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<link rel="stylesheet" href="css/default/jquery.mobile-1.3.2.min.css"><!--1.3.0-->
+		<script src="js/static/jquery-1.10.2.min.js"></script><!--1.7.1-->
+		<script src="js/static/jquery.mobile-1.3.2.min.js"></script><!--1.3.0-->
+	</head>
+<!--(mis eventos)Nivel 2 participante mobile-->
+
+
+
+	<body> 
+		<div data-role="page">  
+			<div data-role="header">
+				<a href="principal_particip.html" data-icon="arrow-l" >Back</a>
+				
+				<!--
+				<a class="ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-right ui-btn-up-a" data-theme="a" data-wrapperels="span" data-iconshadow="true" data-shadow="true" data-corners="true" href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="right">
+					<a href="index.html" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-right ui-btn-up-a">
+						<span class="ui-btn-inner ui-btn-corner-all">
+							<span class="ui-icon ui-icon-arrow-l ui-icon-shadow">&nbsp;</span>
+							<span class="ui-btn-text" data-icon="home">Atras</span>
+							
+						</span>
+				</a>
+				-->
+
+
+				<h1>Mis Eventos</h1>
+				<a href="index.html" data-icon="home" >Home</a>
+				<span class="ui-title" />
+			</div><!-- /header -->
+			<div data-role="content">
+				
+				<ul data-role="listview" data-inset="true" data-filter="true">
+					<li><a href="evento1.html"> VI Simposio de Telecomunicaciones Villatel 2013 </a></li>
+					<li><a  aria-owns="#popupInfo" aria-haspopup="true" data-theme="c"  href="#popupInfo" data-rel="popup" >Más de 70 de los MBA más prestigiosos del mundo</a></li>
+					<li><a href="evento2.html"> RubyPeru Meetup #3125A </a></li>
+					<li><a href="#"> AgilePeru - Reunión mensual setiembre 2013 </a></li>
+					<li><a href="#"> HABILIDADES GERENCIALES II </a></li>
+				</ul>
+
+				<div data-position-to="origin" data-transition="none" data-corners="true" data-shadow="true" data-disabled="false" aria-disabled="false" data-role="popup" id="popupInfo" class="ui-content ui-popup ui-body-e ui-overlay-shadow ui-corner-all" data-theme="e" style="max-width:350px;" data-overlay-theme="a">
+		          <p>Tema <strong>NO iniciado</strong> Espere el inicio para poder participar.</p>
+				</div>
+
+		
+
+			</div>
+
+
+			</div><!-- /content -->
+			<div data-role="footer">
+				<h4>By Group 1ner</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+	</body>
+</html>
