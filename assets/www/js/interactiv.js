@@ -155,6 +155,8 @@ function particip(){
 
 
 function authentic(){
+
+      
       $("#templates").load("templates/authe.html",function(){
 
             var template = $('#authi').html();//dentro

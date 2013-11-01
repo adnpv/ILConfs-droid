@@ -86,14 +86,16 @@ $(document).on("pagebeforeshow", function(e){
         {
           //ojo!!!al inicio, cargar data hacia aca!!!
           asignar_place('event',this);//#evento1
-          evento(); 
+          ideventoo = $(this).attr('id');
+          evento(ideventoo); 
           return false;
         });
 
         $(document).on( "click","#temas",function(event)
         {
           asignar_place('temas',this);//#ev-temas
-          temas();
+          ideventoo = $(this).attr('data-tem');
+          temas(ideventoo);
           return false;
         });
 
@@ -226,28 +228,96 @@ function tema(){
 
 }
 
-function temas(){
-      $("#templates").load("templates/ev-temas.html",function(){
+function temas(idevento){
+      $.ajax({
+              type: "GET",//"POST",
+              dataType: "json",
+              url:"http://localhost:8000/json/topics/",
+              //"http://shielded-peak-5807.herokuapp.com/interactiv/question",//"http://localhost:8000/interactiv/question",
+              data: { 'idevento': idevento},
+              success: function(resulta){
+                  //resuc = JSON.stringify(resulta, null, 4);//jquery json dump
+                  //a = $.parseJSON(resuc);
+                  //alert(resuc);
+                  if(resulta){
+                      //$("#templates").load("templates/misEventos.html",function(){
 
-            var template = $('#alltemas').html();//dentro
+                          $("#templates").load("templates/ev-temas.html",function(){
+                              $.each(resulta, function(key,val) {
+                                var template = $('#template3').html();
+                                var html = Mustache.to_html(template, val);
+                                $('#template33').append(html);
+                              });
+                              a=$('#containerr').html();
+                              
+                              $('.section').html(a).trigger('create');
+                          });
+                    $('#back').attr("class-num", "72");
+                    }
+                    
+              },
+              error: function (xhr, ajaxOptions, thrownError) {
+              alert(xhr.responseText);
+              alert(thrownError);
+              alert('error');
+          }
+          });
+      // $("#templates").load("templates/ev-temas.html",function(){
+
+      //       var template = $('#alltemas').html();//dentro
           
-          $('.section').html(template).trigger('create');
+      //     $('.section').html(template).trigger('create');
 
-          $('#back').attr("class-num", "2");
-      });
+      //     $('#back').attr("class-num", "2");
+      // });
    
 }
 
 
-function evento(){
-      $("#templates").load("templates/evento1.html",function(){
+function evento(idevento){
+        idev = idevento;
+      $.ajax({
+              type: "GET",  //"POST",
+              dataType: "json",
+              url:"http://localhost:8000/json/detalle/",
+              //"http://shielded-peak-5807.herokuapp.com/interactiv/question",//"http://localhost:8000/interactiv/question",
+              data: { 'idevento': idev,},
+              success: function(resulta){
+                  //resuc = JSON.stringify(resulta, null, 4);//jquery json dump
+                  //a = $.parseJSON(resuc);
+                  //alert(resuc);.
+                  if(resulta){
+                      $("#templates").load("templates/evento1.html",function(){
+                        var html ="";
+                            var template = $('#evdeta').html();
+                            html = Mustache.to_html(template, resulta); //other
+                            $('#evdeta').html(html);
 
-            var template = $('#descevento').html();//dentro
+                            b = $('#descevento').html();
+                            t = $('#evtitle').text();
+                            $('.section').html(b).trigger('create');
+                            $('#titulopag').text(t).trigger('create');
+
+                        });
+                    $('#back').attr("class-num", "72");
+                    }
+                    
+              },
+              error: function (xhr, ajaxOptions, thrownError) {
+              alert(xhr.responseText);
+              alert(thrownError);
+              alert('error');
+          }
+          });
+
+      // $("#templates").load("templates/evento1.html",function(){
+
+      //       var template = $('#descevento').html();//dentro
           
-          $('.section').html(template).trigger('create');
+      //     $('.section').html(template).trigger('create');
 
-          $('#back').attr("class-num", "2");
-      });
+      //     $('#back').attr("class-num", "2");
+      // });
       
 
 
@@ -266,6 +336,8 @@ function miseventos(){
                   //resuc = JSON.stringify(resulta, null, 4);//jquery json dump
                   //a = $.parseJSON(resuc);
                   //alert(resuc);
+
+
                   if(resulta){
                       //$("#templates").load("templates/misEventos.html",function(){
 
