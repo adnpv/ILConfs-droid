@@ -11,14 +11,11 @@ import android.os.Bundle;
 import android.util.Log;
 
 import org.apache.cordova.CordovaWebView;
-import org.apache.cordova.CallbackContext;
-import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.api.CallbackContext;
+import org.apache.cordova.api.CordovaPlugin;
 
 import com.google.android.gcm.*;
 
-/**
- * @author awysocki
- */
 
 public class PushPlugin extends CordovaPlugin {
 	public static final String TAG = "PushPlugin";

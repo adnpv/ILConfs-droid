@@ -1,5 +1,7 @@
-var arr = new Array();
+//var arr = new Array();
 //$(document).ready(function(){
+var url="http://pietreal.herokuapp.com"
+var local_url="http://localhost:8000"
 $(document).on("pagebeforeshow", function(e){
 //function onDeviceReady() {
       var place_class =  $('#place').attr('class-num');
@@ -131,7 +133,7 @@ $(document).on("pagebeforeshow", function(e){
 function asignar_place(data,selector){
   $('#place').attr('class-num', data);
   location.hash = $(selector).attr('href'); 
-  arr.push(data);
+  //arr.push(data);
   //alert('asignado');
 }
 
@@ -232,7 +234,7 @@ function temas(idevento){
       $.ajax({
               type: "GET",//"POST",
               dataType: "json",
-              url:"http://localhost:8000/json/topics/",
+              url: url+"/json/topics/",
               //"http://shielded-peak-5807.herokuapp.com/interactiv/question",//"http://localhost:8000/interactiv/question",
               data: { 'idevento': idevento},
               success: function(resulta){
@@ -272,14 +274,17 @@ function temas(idevento){
       // });
    
 }
-
+var url="http://pietreal.herokuapp.com"
+      var local_url="http://localhost:8000"
 
 function evento(idevento){
+      // var url="http://pietreal.herokuapp.com/json/detalle/"
+      // var local_url="http://localhost:8000/json/detalle/"
         idev = idevento;
       $.ajax({
               type: "GET",  //"POST",
               dataType: "json",
-              url:"http://localhost:8000/json/detalle/",
+              url:url + "/json/detalle/",
               //"http://shielded-peak-5807.herokuapp.com/interactiv/question",//"http://localhost:8000/interactiv/question",
               data: { 'idevento': idev,},
               success: function(resulta){
@@ -325,11 +330,13 @@ function evento(idevento){
 
 
 function miseventos(){
+      // var url="http://pietreal.herokuapp.com/user/events/"
+      // var local_url="http://localhost:8000/user/events/"
       var idusuario = window.localStorage.getItem("userid");
       $.ajax({
               type: "GET",//"POST",
               dataType: "json",
-              url:"http://localhost:8000/user/events/", 
+              url:url + "/user/events/", 
               //"http://shielded-peak-5807.herokuapp.com/interactiv/question",//"http://localhost:8000/interactiv/question",
               data: { 'userid': idusuario},
               success: function(resulta){
@@ -380,6 +387,8 @@ function logout(){
   validarlogeado();
 }
 function loged(){
+      // var url="http://pietreal.herokuapp.com/user/login/"
+      // var local_url="http://localhost:8000/user/login/"
       //obtener userid y pw:
       var uid = $('input[name=txtuser]').val();
       var pass = $('input[name=txtpassword]').val();
@@ -387,7 +396,7 @@ function loged(){
       $.ajax({
               type: "GET",//"POST",
               dataType: "json",
-              url:"http://localhost:8000/user/login/", 
+              url:url+"/user/login/", 
               //"http://shielded-peak-5807.herokuapp.com/interactiv/question",//"http://localhost:8000/interactiv/question",
               data: { 'username': uid,
                 'password': pass},
@@ -440,12 +449,13 @@ function login(){
 
 
 function eventos_principal(){
-  var url="http://pietreal.herokuapp.com/json/jsonev/?callback=?" //url de proximos!!
-  var old_url ="http://adnp.pythonanywhere.com/json/jsonev/?callback=?"
-  var local_url="http://localhost:8000/json/jsonev/"
+  var url2 = url + "/json/jsonev/"
+  // var url="http://pietreal.herokuapp.com/json/jsonev/" //url de proximos!!
+  // var old_url ="http://adnp.pythonanywhere.com/json/jsonev/?callback=?"
+  // var local_url="http://localhost:8000/json/jsonev/"
 
   //verificacion cookie!
-  $.getJSON(local_url, function(json) {
+  $.getJSON(url2, function(json) {
       $("#templates").load("templates/template-event.html",function(){
           $.each(json, function(key,val) {
             var template = $('#template3').html();
@@ -463,9 +473,11 @@ function eventos_principal(){
 
 
 function proximos_eventos(){
-  var url="http://pietreal.herokuapp.com/json/jsonev/?callback=?"//url de proximos!!
+  var url2 = url + "/json/jsonev/?callback=?"
+  // var url="http://pietreal.herokuapp.com/json/jsonev/?callback=?"//url de proximos!!
+  // var local_url="http://localhost:8000/json/jsonev/?callback=?"
       //dar id, nombre y descripcion!!!
-  $.getJSON(url, function(json) {
+  $.getJSON(url2, function(json) {
       $("#templates").load("templates/template-event.html",function(){
           $.each(json, function(key,val) {
             var template = $('#template3').html();
