@@ -1,7 +1,7 @@
 //var arr = new Array();
 //$(document).ready(function(){
-var url="http://pietreal.herokuapp.com"
-var local_url="http://localhost:8000"
+var url23="http://pietreal.herokuapp.com";
+var urls="http://localhost:8000";
 $(document).on("pagebeforeshow", function(e){
 //function onDeviceReady() {
       var place_class =  $('#place').attr('class-num');
@@ -234,7 +234,7 @@ function temas(idevento){
       $.ajax({
               type: "GET",//"POST",
               dataType: "json",
-              url: url+"/json/topics/",
+              url: urls+"/json/topics/",
               //"http://shielded-peak-5807.herokuapp.com/interactiv/question",//"http://localhost:8000/interactiv/question",
               data: { 'idevento': idevento},
               success: function(resulta){
@@ -274,8 +274,8 @@ function temas(idevento){
       // });
    
 }
-var url="http://pietreal.herokuapp.com"
-      var local_url="http://localhost:8000"
+//var url="http://pietreal.herokuapp.com"
+//      var local_url="http://localhost:8000"
 
 function evento(idevento){
       // var url="http://pietreal.herokuapp.com/json/detalle/"
@@ -284,7 +284,7 @@ function evento(idevento){
       $.ajax({
               type: "GET",  //"POST",
               dataType: "json",
-              url:url + "/json/detalle/",
+              url:urls + "/json/detalle/",
               //"http://shielded-peak-5807.herokuapp.com/interactiv/question",//"http://localhost:8000/interactiv/question",
               data: { 'idevento': idev,},
               success: function(resulta){
@@ -336,7 +336,7 @@ function miseventos(){
       $.ajax({
               type: "GET",//"POST",
               dataType: "json",
-              url:url + "/user/events/", 
+              url:urls + "/user/events/", 
               //"http://shielded-peak-5807.herokuapp.com/interactiv/question",//"http://localhost:8000/interactiv/question",
               data: { 'userid': idusuario},
               success: function(resulta){
@@ -396,7 +396,7 @@ function loged(){
       $.ajax({
               type: "GET",//"POST",
               dataType: "json",
-              url:url+"/user/login/", 
+              url:urls+"/user/login/", 
               //"http://shielded-peak-5807.herokuapp.com/interactiv/question",//"http://localhost:8000/interactiv/question",
               data: { 'username': uid,
                 'password': pass},
@@ -429,8 +429,8 @@ function loged(){
               alert('error');
           }
           });
-      $('input[name=txtuser]').val() = "";
-      $('input[name=txtpassword]').val() = "";
+      //$('input[name=txtuser]').val() = "";
+      //$('input[name=txtpassword]').val() = "";
       return false;
 }
 
@@ -449,7 +449,7 @@ function login(){
 
 
 function eventos_principal(){
-  var url2 = url + "/json/jsonev/"
+  var url2 = urls + "/json/jsonev/"
   // var url="http://pietreal.herokuapp.com/json/jsonev/" //url de proximos!!
   // var old_url ="http://adnp.pythonanywhere.com/json/jsonev/?callback=?"
   // var local_url="http://localhost:8000/json/jsonev/"
@@ -473,7 +473,7 @@ function eventos_principal(){
 
 
 function proximos_eventos(){
-  var url2 = url + "/json/jsonev/?callback=?"
+  var url2 = urls + "/json/jsonev/?callback=?"
   // var url="http://pietreal.herokuapp.com/json/jsonev/?callback=?"//url de proximos!!
   // var local_url="http://localhost:8000/json/jsonev/?callback=?"
       //dar id, nombre y descripcion!!!

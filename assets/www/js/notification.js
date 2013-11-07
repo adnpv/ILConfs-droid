@@ -25,7 +25,7 @@
                 	pushNotification = window.plugins.pushNotification;
                 	if (device.platform == 'android' || device.platform == 'Android') {
 						$("#app-status-ul").append('<li>registering android</li>');
-                    	pushNotification.register(successHandler, errorHandler, {"senderID":"<proj_id>","ecb":"onNotificationGCM"});		// required!
+                    	pushNotification.register(successHandler, errorHandler, {"senderID":"643214798954","ecb":"onNotificationGCM"});		// required!
 					} else {
 						$("#app-status-ul").append('<li>registering iOS</li>');
                     	pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
