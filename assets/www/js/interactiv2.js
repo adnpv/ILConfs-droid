@@ -12,74 +12,49 @@
       //   });
 
 
-//var url="http://pietreal.herokuapp.com";
-//var local_url="http://pietreal.herokuapp.com";
-var local_url="http://localhost:8000";
-var url="http://localhost:8000";
 
 
-
-
-// click en particip y en autenticar..................entro y pasar a pregus
 $(document).on("click","#particip, #particip2",function(e){
+          
+          //alert("in");
 
-          var entro= 0;
            var auth = 0;
           
           var idauthev = 0;
 
           var codeven= $(this).attr('datum');
           var temid= $(this).attr('datumo');
-          var appl = $(this).attr('id');
-          validarauthentici(entro,auth,idauthev,codeven,temid,appl);
-          if (appl == "particip2"){ //segunda validacion 
-            alert("ingrese denuevo su codigo");
-          }
+          var appl = $(this).attr('id')
 
-
-          
-          
-          return false;
-});
-
-function validarauthentici(entro,auth,idauthev,codeven,temid,appl){
           idauthev = window.localStorage.getItem("codigo"+codeven+"");
-
-          /*
-            logica de estas funciones:
-              llega, es particip2?....click de recepcion de codigo!!!!
-              --no?, revisar si esta auth su codigo.....????idauthev.
-                  (marcar como auth=1)
-
-              cargar codigo codeven!!!!
-          */
+          // alert("codeven");
+          // alert(codeven);
+          // //alert("idauthev");
+          // //alert(idauthev);
+          // alert(appl);
+          // alert("cookie!!!");
+          // alert(idauthev)
           if (appl == "particip2"){    //es, hacer valiacion!!!
                 //alert("entrado verificacion");
                 codeauth(codeven,temid);
-                //sleep(100);
-                
 
               }else{    //ya paso login y existe auth
                 if ( $.isNumeric(idauthev)){   //no es y es numero la session:1
                   auth = 1;
+                  //alert('atiu');
                 }
-          }
-          //assigne().delay(300);
+            }
 
-          //idauthev2 = 0;
           idauthev2 = window.localStorage.getItem("codigo"+codeven+"");
-          //alert(idauthev2);
+          //alert(idauthev2)
           if ( $.isNumeric(idauthev2)){   //no es y es numero la session:1
               auth = 1;
-              //alert('atiu');
+          //alert('atiu');
           }
-
           if (auth == 0){     //no almacenado en session!!! //repetir auth.
               //alert("auth");
               a_href = "#auth"
-              //alert("cargare la auth con:"+codeven + temid);
               authentic(codeven,temid,a_href); 
-              $.mobile.changePage( "#auth", "flip", true, true);
               //location.hash = "#auth"
               
           }else{
@@ -87,25 +62,26 @@ function validarauthentici(entro,auth,idauthev,codeven,temid,appl){
               //alert("parti");
               a_href = "#participan"
               particip(codeven,temid,a_href); 
-              $.mobile.changePage( "#participan", "flip", true, true);
               //location.hash = "#particip"
           }
 
-          $.mobile.changePage( a_href, "flip", true, true);
 
-}
 
+          $.mobile.changePage( $(a_href), "flip", true, true);
+          
+          return false;
+});
 
 
 
 //CARGADO DE PREGUNTAS MULTIPLE OPCION!!!!!!!
-$(document).on( "click","#goin",function(event){
+$(document).on( "click","#goin",function(event)
+//$("#goin").click(function(event)
+{
     a_href = $(this).attr('href');
     codu = $(this).attr('modid');
 
-    //alert('innnnn');
   preguntas(codu, a_href);
-  $.mobile.changePage( $(a_href), "flip", true, true);
   return false;
 });
 
@@ -129,7 +105,7 @@ $(document).on("click","#pregunt",function(e){
 
 //PREGUNTAR!!!!!!!
 //$('#pregu').click(function() {
-$(document).on("click","#pregu",function(e){
+$('article').on("click","#pregu",function(e){
   	/*alert('hello');*/
 	//alert($('input[name=radio-choice]:checked').val());
 	var ptitulo = $('input[name=pname]');
@@ -142,8 +118,7 @@ $(document).on("click","#pregu",function(e){
 	if ($('input[name=pname]').not(':empty')){
   			var ptitu = ptitulo.val();
   			var pdetall = pdetalle.val();
-  			var iduser= window.localStorage.getItem("userid");
-
+  			var iduser= window.localStorage.getItem("userid");;
   			//alert('titulo:'+ptitu);
   			//alert('detalle:'+pdetall);
   			//alert('tema:'+tema);
@@ -151,18 +126,16 @@ $(document).on("click","#pregu",function(e){
   			$.ajax({
 	            type: "GET",
 	            dataType: "json",
-	            url:url+"/interactiv/question", 
+	            url:"http://pietreal.herokuapp.com/interactiv/question", 
 	            //"http://shielded-peak-5807.herokuapp.com/interactiv/question",//"http://localhost:8000/interactiv/question",
-              beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
-              complete: function() { $.mobile.hidePageLoadingMsg() },
 	            data: { 'titulo': ptitu,
 	        			'detalle': pdetall,
 	        			'idus': iduser,
 	        			'idtema': tema},
 	            success: function(response){
 	                alert('thanks');
-	                //particip();
-                  $.mobile.changePage( "#participan", "flip", true, true);
+	                particip();
+
 	            },
 	            error: function (xhr, ajaxOptions, thrownError) {
 			        alert(xhr.responseText);
@@ -182,28 +155,25 @@ $(document).on("click","#pregu",function(e){
 
 
 //RESOLVER!!!!!!!
-$(document).on("click","#resolv",function(e){
-  //alert('hello');
+$('article').on("click","#resolv",function(e){
+  	alert('hello');
 	//alert($('input[name=radio-choice]:checked').val());
 	var quest=$('fieldset').attr('id');
 	if ($('input[name=radio-choice]').is(':checked')){
   			var rad_val = $('input:radio[name=radio-choice]:checked').val();
 
-  			//alert(quest);
-  			//alert(rad_val);
+  			alert(quest);
+  			alert(rad_val);
   			$.ajax({
 	            type: "GET",
 	            dataType: "json",
-	            url: url +"/interactiv/resolv",
+	            url: "http://pietreal.herokuapp.com/interactiv/resolv",
 	            //"http://shielded-peak-5807.herokuapp.com/interactiv/resolv",//"http://localhost:8000/interactiv/resolv",
 	            data: { 'send_resul': rad_val,
 	        			'quest':quest},
-                beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
-            complete: function() { $.mobile.hidePageLoadingMsg() },
 	            success: function(response){
-	                alert('Gracias');
-	                //particip();
-                  $.mobile.changePage( "#participan", "flip", true, true);
+	                alert('thanks');
+	                particip();
 	            },
 	            error: function (xhr, ajaxOptions, thrownError) {
 			        alert(xhr.responseText);
@@ -260,14 +230,14 @@ $(document).on("click","#resolv",function(e){
 
 
 
-function particip(codev, codtem, a_href){
+function particip(codev,codtem,a_href){
       $tochange = $(a_href+'> article');
       //obtener id de local storage y hacer consulta a db.
 
       $("#templates9").load("templates/ev-tem-interac.html",function(){
             //colocarle nombre tambien!!
-            $('#goin').attr('modid',codtem);
-            $('#pregunt').attr('modid',codtem);
+            $('#goin').attr('modid',codtop);
+            $('#pregunt').attr('modid',codtop);
             var template = $('#interact').html();//dentro
           
           $tochange.html(template).trigger('create');
@@ -276,35 +246,23 @@ function particip(codev, codtem, a_href){
       });
 
 }
-function cleantemplate(template){
-  $(template).empty();
-}
 
-function authentic(codeven,codtop,a_href){  // no cambia????
+
+function authentic(codeven,codtop,a_href){
       $tochange = $(a_href+'> article');
-      cargaprevia = '#templates7';
       //PASADO ESTO!!!! obtener id de local storage y hacer consulta a db.
-      cleantemplate(cargaprevia);
-      //alert("en authentic");
-      //alert(codeven);
 
-      //alert($tochange.html());
-      $(cargaprevia).load("templates/authe.html",function(){
-          
+      $("#templates7").load("templates/authe.html",function(){
+          $('#particip2').attr('datum',codeven);
+          $('#particip2').attr('datumo',codtop);
           var template = $('#authi').html();//dentro
           
           $tochange.html(template).trigger('create');
 
-          $('#particip2').attr('datum',codeven);
-          //alert("en authentic IN");
-          //alert(codeven);
-          $('#particip2').attr('datumo',codtop);
-          //alert("dato colocadoooooooooooooooooooooooooooo");
-          a=$('#particip2').attr('datumo');
-          //alert(a);
-          //alert($tochange.html());
           //$('#back').attr("class-num", "2");
       });
+      
+
 
 }
 
@@ -312,29 +270,19 @@ function authentic(codeven,codtop,a_href){  // no cambia????
 function codeauth(codeven, codtopic){
       var cod = $('input[name=txtcode]').val();
       var idusuario = window.localStorage.getItem("userid");
-      // if (cod == "1234"){
-      //   window.localStorage.setItem("codigo"+codeven+"", codeven);
-      // }else{
-      //alert("en codeauth");
-      //alert(codeven);
+      
       $.ajax({
               type: "GET",
               dataType: "json",
               url:url +"/user/validtick/", 
-              data: { 'idev': codeven,    //siempre marca evento?? el guardado???
-                'idtem': codtopic,      //siempre el mismo tema??
+              data: { 'idev': codeven,
+                'idtem': codtopic,
                 'userid': idusuario,
                 'codau': cod,},
-              beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
-              complete: function() { $.mobile.hidePageLoadingMsg() },
               success: function(resulta){
                   //alert(resulta.result);
                   if(resulta.result == "Exito"){
                       window.localStorage.setItem("codigo"+codeven+"", codeven);
-                      //alert("en llave: "+ "codigo"+codeven+"");
-                      //alert(codeven);
-                  }else if(resulta.result == "Error"){
-                    alert("error con su codigo de autenticacion!");
                   }
               },
               error: function (xhr, ajaxOptions, thrownError) {
@@ -343,7 +291,7 @@ function codeauth(codeven, codtopic){
               alert('error');
           }
           });
-      //}
+    
 
       //$('input[name=txtuser]').val() = "";
       //$('input[name=txtpassword]').val() = "";
@@ -356,7 +304,14 @@ function codeauth(codeven, codtopic){
 
 
 
-//para realizar una pregunta al expositor.... hacer consulta  para ver si esta habilitada
+
+
+
+
+
+
+
+
 function pregunt(codtop,a_href){
 
       $tochange = $(a_href+'> article');
@@ -374,12 +329,11 @@ function pregunt(codtop,a_href){
 
 }
 
-//CAMBIAR LOCACION DE PREGUNTA!!!!!!!!!!!(MULTIPLE OPCION)
+//CAMBIAR LOCACION DE PREGUNTA!!!!!!!!!!!
 function preguntas(cod, a_href){
     $tochange = $(a_href+'> article');
     $titulo = $(a_href+'> header > h1');
-    alert("hereee en preguntasss multiple opcion");
-    alert(cod)
+
     //var give = $('#style-include1').html();
     $.ajax({
         data:
@@ -389,9 +343,7 @@ function preguntas(cod, a_href){
             },
         //datatype: 'json',
         type: 'GET',
-        beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
-        complete: function() { $.mobile.hidePageLoadingMsg() },
-        url:url +"/interactiv/jsonquest", 
+        url:"http://pietreal.herokuapp.com/interactiv/jsonquest", 
           //"http://shielded-peak-5807.herokuapp.com/interactiv/jsonquest",//'http://localhost:8000/interactiv/jsonquest',
         success: function(result)
             {

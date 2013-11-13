@@ -1,181 +1,389 @@
-<!doctype html>
-<html> 
-	<head> 
-		<title>Plataforma interactiva Ev</title>
-		<meta charset="UTF-8">
-    	<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-		<!--CSS(JQUERY 1.3.0)-->
-		<link rel="stylesheet" href="css/default/jquery.mobile-1.3.2.min.css"><!--JQUERY 1.3.0-->
-		<!--CSS(menu lados)-->
-		<link rel="stylesheet" href="css/nav-menu-style.css">
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>mobiletuts phonegap</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+  
+  <!--<script src="js/static/cordova.js"></script>-->
+  <link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
+  <script src="js/static/jquery-2.0.3.min.js"></script>
+  <script src="js/static/jquery.mobile-1.3.2.min.js"></script>
+  <script type="text/javascript" charset="utf-8" src="js/static/mustache.js">
+    </script>
 
-		<!--SCRIPTS( CORDOVA, JQUERY, JQUERYMOBILE, MUSTACHE-->
-		<script type="text/javascript" charset="utf-8" src="js/static/cordova.js"></script>
-		<script type="text/javascript" src="js/static/jquery-1.10.2.min.js"></script><!--1.7.1-->
-		<script type="text/javascript" src="js/static/jquery.mobile-1.3.2.min.js"></script><!--1.3.0-->
-	
-		<script type="text/javascript" charset="utf-8" src="js/static/mustache.js"></script>
-		<script type="text/javascript" src="js/static/PushNotification.js"></script>
-		<!--SCRIPTS( menu lados, incluir, enviar resultados-->
-		<script src="js/nav-menu-script.js"></script>
-		<script src="js/mustache-inclusions.js"></script>
-		<script src="js/interactiv.js"></script><!--1.3.0-->
-		<script src="js/notification.js"></script><!--1.3.0-->
-
-	</head>
-<!--(inicio)Nivel 2 publico mobile-->
-
-
-	<body>
-		<section data-role="page" id="home-page" data-theme="d">
-		    <header data-role="header" data-theme="b">
-		    	
-		    	<h1 id="titulopag">PIETReal</h1>
-
-		        <a href="#left-panel" 
-		        		data-theme="d" .
-		        		data-icon="bars" 
-		        		data-iconpos="notext" 
-		        		data-shadow="false" 
-		        		data-iconshadow="false" 
-		        		class="ui-icon-nodisc">Open left panel</a>
-
-		        <a href="#right-panel" 
-		        		data-theme="d" 
-		        		data-icon="arrow-l" 
-		        		data-iconpos="notext" 
-		        		data-shadow="false" 
-		        		data-iconshadow="false" 
-		        		class="ui-icon-nodisc">Open right panel</a>
-		    </header><!-- /header -->
-
-		    <article data-role="content">
-		    	<a style="display:none" id="place" class-num="home" data-icon="arrow-l" ></a>
-		    	<div id="changable" class="section">
-
-				</div>
-				<div id="home">
-					<div id="app-status-div">
-						<ul id="app-status-ul">
-							<li>.</li>
-						</ul>
-					</div>
-				</div>
-				<!--<div id="templates" style="display: none;"></div>-->
-		    </article>
-		    		<!-- Cargador de data! -->
-		    
-		    
-
-			<!-- /content -->
+  <script type="text/javascript" charset="utf-8" src="js/mustache-inclusions.js">
+    </script> 
+  <script type="text/javascript" charset="utf-8" src="js/interactiv.js">
+    </script> 
+  <script>
+     // function onLoad(){
+     //      document.addEventListener("deviceready", onDeviceReady, true);
+     // }
+     // function onDeviceReady(){
+     //      eventos_principal();
+     //      navigator.notification.alert("PhoneGap is working!!");
+     // }
+  </script>
+  </head>
+  <body  id="place"> <!-- onload="onLoad();"-->
 
 
 
-			<!-- PANELES -->
-
-	    <nav data-role="panel" id="left-panel" 
-	    		data-display="overlay" 
-	    		data-position="left" 
-	    		data-theme="b">
-
-	        <ul data-role="listview" data-theme="d" data-icon="false">
-
-	            <li data-icon="delete">
-	            	<a href="#" data-rel="close">Close</a></li>
-
-	            <li >
-	            	<a id="configs"> Menu</a>
-	            </li>
-	            <li>
-	            	<a id="homini">home</a></li>
-	            <li>
-	            	<a href="#login" id="logini">Login</a></li>
-	            <li>
-	            	<a href="#login" style="display:none" id="logouti">LogOut</a></li>
-	            	
-	            <li>
-	            	<a href="ayuda.html">Ayuda</a></li>
-	           	<li>
-	            	<a id="back" class-num="nome" data-icon="arrow-l" >Back</a>
-	        </ul>
-	    </nav><!-- /panel -->
+<!-- ____________________________________________________________________________-->
+<!-- ____________________________________________________________________________-->
 
 
-		<nav data-role="panel" id="right-panel" data-theme="b" data-position="right">
-	        <ul data-role="listview" data-theme="d">
-	            <li data-icon="delete">
-	            	<a href="#" data-rel="close">Close</a></li>
-	            <li data-role="list-divider"></li>
-	        </ul>
+    <section data-role="page" id="home">
+      <header data-role="header" data-theme="b">
+        <a href="#home" data-icon="home" data-iconpos="notext">Home</a>
+            <h1>Piet Real app</h1>
+            <a id="logini" href="#login" data-icon="info">Login</a>
+      </header>
+            
+      <article data-role="content" class="section2">
+            <p>App start</p>
+             <div id="templates" style="display: none;"></div>
+      </article>
+      
 
-	        <div data-role="collapsible" 
-	        	data-inset="false" 
-	        	data-iconpos="right" 
-	        	data-theme="d" 
-	        	data-content-theme="d">
+      <footer data-role="footer" data-theme="b" data-position="inline">
+             
+             <a class="logouti" data-icon="info" 
+                  style="display: none; width:150px;">Logout</a>
+             <a href="#about" data-icon="info">About</a>
+             <a id="exit" data-icon="info">Exit</a>
+      </footer>
+    </section>
 
-		        <h3>Categoria</h3>
-		        <div data-role="collapsible-set" 
-		          	data-inset="false" 
-		          	data-iconpos="right" 
-		          	data-theme="b" 
-		          	data-content-theme="d">
+<!-- ____________________________________________________________________________-->
+<!-- ____________________________________________________________________________-->
 
-		            <div data-role="collapsible">
-		              	<h3>IT</h3>
-		              	<ul data-role="listview">
-		                	<li><a href="#">lenguajes</a></li>
-		                	<li><a href="#">juegos</a></li>
-		                	<li><a href="#">seguridad</a></li>
-		                	<li><a href="#">Redes</a></li>
-		              	</ul>
-		            </div><!-- /collapsible -->
 
-		            <div data-role="collapsible">
-		              	<h3>Cocina</h3>
-		              	<ul data-role="listview">
-		                	<li><a href="#">peruana</a></li>
-		                	<li><a href="#">Extranjera</a></li>
-		              	</ul>
-		            </div><!-- /collapsible -->
-		            
-		        </div><!-- /collapsible-set -->
-	        </div><!-- /collapsible -->
-	    </nav><!-- /panel -->
-		</section><!-- /page -->
-		<!---->
 
-	</body>
+      <section data-role="page" id="login">
+
+        <header data-role="header" data-theme="b" data-position="fixed">
+            <a href="#home" data-icon="home" data-iconpos="notext">Home</a>
+            <h1>Login</h1>
+            <a data-icon="arrow-l" data-rel="back">Back</a>
+        </header>
+
+        <article data-role="content" class="section">
+            <p>Share your favorite URLs with other mobile phone users through QR codes.</p>
+            <div id="templates1" style="display: none;"></div>
+        </article>
+
+        <footer data-role="footer" class="ui-bar" data-theme="b" data-position="fixed" data-id="footer">
+            <a href="#about" data-icon="info">About</a>
+             <a class="logouti" data-icon="info" 
+                  style="display: none; width:150px;">Logout</a>
+            <a id="exit" data-icon="info">Exit</a>
+        </footer>
+        
+      </section>
+
+<!-- ____________________________________________________________________________-->
+<!-- ____________________________________________________________________________-->
+
+
+     <section data-role="page" id="oneevent">
+
+        <header data-role="header" data-theme="b" data-position="fixed">
+            <a href="#home" data-icon="home" data-iconpos="notext">Home</a>
+            <h1>Login</h1>
+            <a data-icon="arrow-l" data-rel="back">Back</a>
+        </header>
+
+        <article data-role="content" >
+            <p>Un Evento</p>
+           
+        </article>
+         <div id="templates2" style="display: none;"></div>
+        <footer data-role="footer" class="ui-bar" data-theme="b" data-position="fixed" data-id="footer">
+            <a href="#about" data-icon="info">About</a>
+             <a class="logouti" data-icon="info" 
+                  style="display: none; width:150px;">Logout</a>
+            <a id="exit" data-icon="info">Exit</a>
+        </footer>
+        
+      </section>
+
+
+<!-- ____________________________________________________________________________-->
+<!-- ____________________________________________________________________________-->
+
+
+
+
+
+      <section data-role="page" id="ev-temas">
+
+        <header data-role="header" data-theme="b" data-position="fixed">
+            <a href="#home" data-icon="home" data-iconpos="notext">Home</a>
+            <h1>Temas del eventoN</h1>
+            <a  data-icon="arrow-l" data-rel="back">Back</a>
+        </header>
+
+        <article data-role="content" class="section">
+            <p>Cargando los temas</p>
+            
+        </article>
+        <div id="templates3" style="display: none;">vvv</div>
+
+        <footer data-role="footer" class="ui-bar" data-theme="b" data-position="fixed" data-id="footer">
+            <a href="#about" data-icon="info">About</a>
+             <a class="logouti" data-icon="info" 
+                  style="display: none; width:150px;">Logout</a>
+            <a id="exit" data-icon="info">Exit</a>
+        </footer>
+        
+      </section>
+
+<!-- ____________________________________________________________________________-->
+<!-- ____________________________________________________________________________-->
+
+
+      <section data-role="page" id="options">
+
+        <header data-role="header" data-theme="b" data-position="fixed">
+            <a href="#home" data-icon="home" data-iconpos="notext">Home</a>
+            <h1>Bievenido</h1>
+            <a data-icon="arrow-l" data-rel="back">Back</a>
+        </header>
+
+        <article data-role="content" class="section">
+            <p>Error de Login!!</p>
+            <div id="templates4" style="display: none;"></div>
+        </article>
+
+        <footer data-role="footer" class="ui-bar" data-theme="b" data-position="fixed" data-id="footer">
+            <a href="#about" data-icon="info">About</a>
+             <a class="logouti" data-icon="info" 
+                  style="display: none; width:150px;">Logout</a>
+            <a id="exit" data-icon="info">Exit</a>
+        </footer>
+        
+      </section>
+
+<!-- ____________________________________________________________________________-->
+<!-- ____________________________________________________________________________-->
+
+   
+      <section data-role="page" id="misev">
+
+        <header data-role="header" data-theme="b" data-position="fixed">
+            <a href="#home" data-icon="home" data-iconpos="notext">Home</a>
+            <h1>Bievenido</h1>
+            <a data-icon="arrow-l" data-rel="back">Back</a>
+        </header>
+
+        <article data-role="content" class="section">
+            <p>Su info</p>
+            <div id="templates8" style="display: none;"></div>
+        </article>
+
+        <footer data-role="footer" class="ui-bar" data-theme="b" data-position="fixed" data-id="footer">
+            <a href="#about" data-icon="info">About</a>
+             <a class="logouti" data-icon="info" 
+                  style="display: none; width:150px;">Logout</a>
+            <a id="exit" data-icon="info">Exit</a>
+        </footer>
+        
+      </section>
+
+
+<!-- ____________________________________________________________________________-->
+<!-- ____________________________________________________________________________-->
+
+
+      <section data-role="page" id="onetopic">
+
+        <header data-role="header" data-theme="b" data-position="fixed">
+            <a href="#home" data-icon="home" data-iconpos="notext">Home</a>
+            <h1>Tema1</h1>
+            <a data-icon="arrow-l" data-rel="back">Back</a>
+        </header>
+
+        <article data-role="content" >
+            <p>temas</p>
+           
+        </article>
+         <div id="templates6" style="display: none;"></div>
+
+        <footer data-role="footer" class="ui-bar" data-theme="b" data-position="fixed" data-id="footer">
+            <a href="#about" data-icon="info">About</a>
+             <a class="logouti" data-icon="info" 
+                  style="display: none; width:150px;">Logout</a>
+            <a id="exit" data-icon="info">Exit</a>
+        </footer>
+        
+      </section>
+
+
+<!-- ____________________________________________________________________________-->
+<!-- ____________________________________________________________________________-->
+
+      <section data-role="page" id="auth">
+
+        <header data-role="header" data-theme="b" data-position="fixed">
+            <a href="#home" data-icon="home" data-iconpos="notext">Home</a>
+            <h1>Autenticacion</h1>
+            <a data-icon="arrow-l" data-rel="back">Back</a>
+        </header>
+
+        <article data-role="content" >
+            <p>Autentiquese here!</p>
+            
+        </article>
+         <div id="templates7" style="display: none;"></div>
+
+        <footer data-role="footer" class="ui-bar" data-theme="b" data-position="fixed" data-id="footer">
+            <a href="#about" data-icon="info">About</a>
+             <a class="logouti" data-icon="info" 
+                  style="display: none; width:150px;">Logout</a>
+            <a id="exit" data-icon="info">Exit</a>
+        </footer>
+        
+      </section>
+
+
+
+<!-- ____________________________________________________________________________-->
+<!-- ____________________________________________________________________________-->
+
+      <section data-role="page" id="participan">
+
+        <header data-role="header" data-theme="b" data-position="fixed">
+            <a href="#home" data-icon="home" data-iconpos="notext">Home</a>
+            <h1>Interactivooo</h1>
+            <a data-icon="arrow-l" data-rel="back">Back</a>
+        </header>
+
+        <article data-role="content" >
+            <p>Interactividad!!!</p>
+            <div id="templates9" style="display: none;"></div>
+        </article>
+         
+
+        <footer data-role="footer" class="ui-bar" data-theme="b" data-position="fixed" data-id="footer">
+            <a href="#about" data-icon="info">About</a>
+             <a class="logouti" data-icon="info" 
+                  style="display: none; width:150px;">Logout</a>
+            <a id="exit" data-icon="info">Exit</a>
+        </footer>
+        
+      </section>
+
+
+<!-- ____________________________________________________________________________-->
+<!-- ____________________________________________________________________________-->
+
+      <section data-role="page" id="preg-hacer">
+
+        <header data-role="header" data-theme="b" data-position="fixed">
+            <a href="#home" data-icon="home" data-iconpos="notext">Home</a>
+            <h1>Realizar una Pregunta</h1>
+            <a data-icon="arrow-l" data-rel="back">Back</a>
+        </header>
+
+        <article data-role="content" >
+            <p>auth req.</p>
+            <div id="templates10" style="display: none;"></div>
+        </article>
+         
+
+        <footer data-role="footer" class="ui-bar" data-theme="b" data-position="fixed" data-id="footer">
+            <a href="#about" data-icon="info">About</a>
+             <a class="logouti" data-icon="info" 
+                  style="display: none; width:150px;">Logout</a>
+            <a id="exit" data-icon="info">Exit</a>
+        </footer>
+        
+      </section>
+
+
+
+<!-- ____________________________________________________________________________-->
+<!-- ____________________________________________________________________________-->
+
+      <section data-role="page" id="mopc">
+
+        <header data-role="header" data-theme="b" data-position="fixed">
+            <a href="#home" data-icon="home" data-iconpos="notext">Home</a>
+            <h1>Multiple opcion</h1>
+            <a data-icon="arrow-l" data-rel="back">Back</a>
+        </header>
+
+        <article data-role="content" >
+            <p>Autentiquese pa multiple opcion</p>
+            <div id="templates11" style="display: none;"></div>
+        </article>
+         
+
+        <footer data-role="footer" class="ui-bar" data-theme="b" data-position="fixed" data-id="footer">
+            <a href="#about" data-icon="info">About</a>
+             <a class="logouti" data-icon="info" 
+                  style="display: none; width:150px;">Logout</a>
+            <a id="exit" data-icon="info">Exit</a>
+        </footer>
+        
+      </section>
+
+<!-- ____________________________________________________________________________-->
+<!-- ____________________________________________________________________________-->
+
+      <section data-role="page" id="ev-encuesta">
+
+        <header data-role="header" data-theme="b" data-position="fixed">
+            <a href="#home" data-icon="home" data-iconpos="notext">Home</a>
+            <h1>Encuesta Final </h1>
+            <a data-icon="arrow-l" data-rel="back">Back</a>
+        </header>
+
+        <article data-role="content" >
+            <p>Pregunta finalll</p>
+            <div id="templates12" style="display: none;"></div>
+        </article>
+         
+
+        <footer data-role="footer" class="ui-bar" data-theme="b" data-position="fixed" data-id="footer">
+            <a href="#about" data-icon="info">About</a>
+             <a class="logouti" data-icon="info" 
+                  style="display: none; width:150px;">Logout</a>
+            <a id="exit" data-icon="info">Exit</a>
+        </footer>
+        
+      </section>
+
+
+<!-- ____________________________________________________________________________-->
+<!-- ____________________________________________________________________________-->
+
+      <section data-role="page" id="ev-horario">
+
+        <header data-role="header" data-theme="b" data-position="fixed">
+            <a href="#home" data-icon="home" data-iconpos="notext">Home</a>
+            <h1>Horario </h1>
+            <a data-icon="arrow-l" data-rel="back">Back</a>
+        </header>
+
+        <article data-role="content" >
+            <p>Autentiquese pa la preg final</p>
+            <div id="templates12" style="display: none;"></div>
+        </article>
+         
+
+        <footer data-role="footer" class="ui-bar" data-theme="b" data-position="fixed" data-id="footer">
+            <a href="#about" data-icon="info">About</a>
+             <a class="logouti" data-icon="info" 
+                  style="display: none; width:150px;">Logout</a>
+            <a id="exit" data-icon="info">Exit</a>
+        </footer>
+        
+      </section>
+
+
+
+  </body>
 </html>
-<div id="templates" style="display: none;"></div>
-<div id="templates2" style="display: none;"></div>
-
-
-
-
-		
-<script>
-	document.addEventListener("deviceready", onDeviceReady, false);
-
-	function onDeviceReady() {
-		document.addEventListener("pause", onPause, false);
-		document.addEventListener("resume", onResume, false);
-		alert("Device is Ready");
-
-	}
-
-
-//What to do when paused
-function onPause(){
-	
-	alert("paused!");
-}
-
-//What to do when resumed
-function onResume()
-{
-	
-	alert("resume");
-}
-</script>
