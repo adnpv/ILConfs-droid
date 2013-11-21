@@ -1,4 +1,11 @@
 
+// Storage.prototype.setArray = function(key, obj) {
+//     return this.setItem(key, JSON.stringify(obj))
+// }
+// Storage.prototype.getArray = function(key) {
+//     return JSON.parse(this.getItem(key))
+// }
+
 //var arr = new Array();
 //$(document).ready(function(){
 
@@ -20,8 +27,8 @@ function onDeviceReady(){
 $(document).on( "click",'#exit',function(event){
       navigator.app.exitApp();
         });
-
 */
+
 
 /*$(document).bind("pagebeforechange", function(e, data) {
   //alert("hi");
@@ -78,10 +85,18 @@ $(document).on("pagebeforeshow", function(e,data ){
 
     $(document).on( "click",".idtema",function(event)
         {
+          //var idusuarioo = window.localStorage.getItem("userid");
           a_href = $(this).attr('href');
           idtopic = $(this).attr('id');
           tema(idtopic, a_href); 
           $.mobile.changePage( $(a_href), "flip", true, true);
+          // if (idusuarioo != null) {
+          //   alert("Bienvenido");
+          //       $('#particip').css("display", "block");
+          // }else{
+          //      $('#particip').css("display", "none");
+          // }
+          // validarlogeado();
           return false;
         });
 
@@ -116,8 +131,60 @@ $(document).on("pagebeforeshow", function(e,data ){
           return false;
         });
 
+    $(document).on( "click","#expositores",function(event)
+        {
+          a_href = $(this).attr('href');
+          idtem = $(this).attr('data-tem');
+
+          speakersload(idtem,a_href);
+          $.mobile.changePage( $(a_href), "flip", true, true);
+          return false;
+        });
 
 
+
+function speakersload(idtema, a_href){
+      cargaprevia = '#templates14';
+      
+      $tochange = $(a_href+'> article');
+      $titulo = $(a_href+'> header > h1');
+      
+      clearstuff(cargaprevia,$tochange);
+
+      $.ajax({
+              type: "GET",
+              dataType: "json",
+              url:url + "/json/verexpositor/",
+              data: { 'top': idtema,},
+              beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
+              complete: function() { $.mobile.hidePageLoadingMsg() },
+              success: function(resulta){
+                  if(resulta){
+                    
+                      $(cargaprevia).load("templates/expositor-tema.html",function(){
+                        var html ="";
+                            var template = $('#expdeta').html();
+                            html = Mustache.to_html(template, resulta); //other
+                            $('#evdeta').html(html);
+
+                            b = $('#expint').html();
+                            t = $('#exptitle').text();
+
+
+                            $tochange.html(b).trigger('create');
+                            $titulo.text(t).trigger('create');
+
+                        });
+                    }
+                    
+              },
+              error: function (xhr, ajaxOptions, thrownError) {
+              alert(xhr.responseText);
+              alert(thrownError);
+              alert('error');
+          }
+          });
+}
 
 
 
@@ -232,6 +299,9 @@ function login(a_href){
 function logout(){// talvez al deslogearse... eliminar las cookies de sus codigos q habilito!!!
   window.localStorage.removeItem("userid");
   window.localStorage.removeItem("codigo210");//estatico por el momento, como manejar 2 o mas eventos?
+  window.localStorage.removeItem("codigo212");
+  window.localStorage.removeItem("codigo1");
+  window.localStorage.removeItem("codigosuser");
                   //deslogearlos? los codigos deberian estar en un lugar, localstorage... array? te todas las llaves!!!
                       //si quiere guardar en django sus llaves podra enviarlas!!
   $.mobile.changePage( $('#home'), "flip", true, true);
@@ -242,6 +312,9 @@ function loged(a_href){
       cargaprevia = '#templates4';
       $tochange = $(a_href+'> article');
       $titulo = $(a_href+'> header > h1');
+      clearstuff(cargaprevia,$tochange);
+      $titulo.empty();
+
       var uid = $('input[name=txtuser]').val();
       var pass = $('input[name=txtpassword]').val();
 
@@ -285,6 +358,8 @@ function loged(a_href){
                   
                   if(resulta){
                     if(resulta.result == "Exito"){
+
+                      //alert(resulta.userid);
                       window.localStorage.setItem("userid", resulta.userid);
                       $(cargaprevia).load("templates/logedprinc.html",function(){
                         var html ="";
@@ -296,9 +371,17 @@ function loged(a_href){
 
 
                             $tochange.html(b).trigger('create');
+                            //alert(t);
                             $titulo.text(t).trigger('create');
 
                         });
+                        
+                        //definiendo arreglo de codigos!:
+                          var authcodes = new Array();
+                          //gatheredPosts.push({title:posts[i].title, content:posts[i].content});
+                          //window.localStorage.setItem("cachedPosts", gatheredPosts);
+                          authcodes2= JSON.stringify(authcodes);
+                          window.localStorage.setItem("codigosuser", authcodes2);
                       //$(cargaprevia).html("<div> </div>");
                         validarlogeado(); 
                       }else{
@@ -379,6 +462,7 @@ function tema(idtopic,a_href){
       $tochange = $(a_href+'> article');
       $titulo = $(a_href+'> header > h1');
         idto = idtopic;
+
       $.ajax({
               type: "GET",
               dataType: "json",
@@ -402,6 +486,8 @@ function tema(idtopic,a_href){
                             $titulo.text(t).trigger('create');
 
                         });
+                        
+
                     }
                     
               },
@@ -484,16 +570,20 @@ function temas(idevento, a_href){
 
 function validarlogeado(){
   var idusuario = window.localStorage.getItem("userid");
+  //alert(idusuario);
   if (idusuario != null) {
     $('#logini').css("display", "none");
     $('.logouti').css("display", "block");
+    //$('#particip').css("display", "block");
     $('a[data-icon=home]').attr('href','#options');
-    return True;
+    return true;
   }else{
     $('#logini').css("display", "block");
     $('.logouti').css("display", "none");
+    //$('#particip').css("display", "none");
     $('a[data-icon=home]').attr('href','#home');
-    return False;
+    return false;
   }
+  return false;
 
 }
