@@ -8,6 +8,25 @@
 
 //var arr = new Array();
 //$(document).ready(function(){
+// <<<<<<< HEAD
+// =======
+// var url23="http://pietreal.herokuapp.com";
+// var urls="http://localhost:8000";
+// $(document).on("pagebeforeshow", function(e){
+// //function onDeviceReady() {
+//       var place_class =  $('#place').attr('class-num');
+      
+//       if (place_class == 'home') {
+//         //if (validarlogeado()){
+//           //funcion de cargado de opciones con localstorage
+//           //}else{
+//           eventos_principal();
+//           //}        
+//       }
+
+//       $(document).on( "click", "#homini",function(event)
+//         {
+// >>>>>>> ca6e2863bba8f7ce37dd4842f4f15202b5776691
 
 //var url="http://pietreal.herokuapp.com";
 //var local_url="http://pietreal.herokuapp.com";
@@ -345,11 +364,17 @@ function loged(a_href){
       $.ajax({
               type: "GET",
               dataType: "json",
+// <<<<<<< HEAD
               url:local_url+"/user/login/", 
               data: { 'username': uid,
                 'password': pass},
               beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
               complete: function() { $.mobile.hidePageLoadingMsg() },
+// =======
+//               url: urls+"/json/topics/",
+//               //"http://shielded-peak-5807.herokuapp.com/interactiv/question",//"http://localhost:8000/interactiv/question",
+//               data: { 'idevento': idevento},
+// >>>>>>> ca6e2863bba8f7ce37dd4842f4f15202b5776691
               success: function(resulta){
                   //resuc = JSON.stringify(resulta, null, 4);//jquery json dump
                   //a = $.parseJSON(resuc);
@@ -411,6 +436,11 @@ function clearstuff(template, article){
   $(template).empty();
   article.empty();
 }
+// <<<<<<< HEAD
+// =======
+// //var url="http://pietreal.herokuapp.com"
+// //      var local_url="http://localhost:8000"
+// >>>>>>> ca6e2863bba8f7ce37dd4842f4f15202b5776691
 
 function evento(idevento, a_href){
       cargaprevia = '#templates2';
@@ -424,7 +454,12 @@ function evento(idevento, a_href){
       $.ajax({
               type: "GET",
               dataType: "json",
+// <<<<<<< HEAD
               url:url + "/json/detalle/",
+// =======
+//               url:urls + "/json/detalle/",
+//               //"http://shielded-peak-5807.herokuapp.com/interactiv/question",//"http://localhost:8000/interactiv/question",
+// >>>>>>> ca6e2863bba8f7ce37dd4842f4f15202b5776691
               data: { 'idevento': idev,},
               beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
               complete: function() { $.mobile.hidePageLoadingMsg() },
@@ -466,10 +501,16 @@ function tema(idtopic,a_href){
       $.ajax({
               type: "GET",
               dataType: "json",
+// <<<<<<< HEAD
               url:url + "/json/detalletopic/",
               data: { 'idtopic': idto,},
               beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
               complete: function() { $.mobile.hidePageLoadingMsg() },
+// =======
+//               url:urls + "/user/events/", 
+//               //"http://shielded-peak-5807.herokuapp.com/interactiv/question",//"http://localhost:8000/interactiv/question",
+//               data: { 'userid': idusuario},
+// >>>>>>> ca6e2863bba8f7ce37dd4842f4f15202b5776691
               success: function(resulta){
                   if(resulta){
                       $("#templates6").load("templates/ev-tema.html",function(){
@@ -530,7 +571,11 @@ function temas(idevento, a_href){
       $.ajax({
               type: "GET",//"POST",
               dataType: "json",
+// <<<<<<< HEAD
               url: url+"/json/topics/",
+// =======
+//               url:urls+"/user/login/", 
+// >>>>>>> ca6e2863bba8f7ce37dd4842f4f15202b5776691
               //"http://shielded-peak-5807.herokuapp.com/interactiv/question",//"http://localhost:8000/interactiv/question",
               data: { 'idevento': idev},
               beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
@@ -564,6 +609,69 @@ function temas(idevento, a_href){
               alert('error');
           }
           });
+// <<<<<<< HEAD
+// =======
+//       //$('input[name=txtuser]').val() = "";
+//       //$('input[name=txtpassword]').val() = "";
+//       return false;
+// }
+
+
+// function login(){
+//      $("#templates").load("templates/login.html",function(){
+
+//           var template = $('#login').html();/// internal
+        
+//         $('.section').html(template).trigger('create');
+
+//         $('#back').attr("class-num", "2");
+//      });
+// }
+
+
+
+// function eventos_principal(){
+//   var url2 = urls + "/json/jsonev/"
+//   // var url="http://pietreal.herokuapp.com/json/jsonev/" //url de proximos!!
+//   // var old_url ="http://adnp.pythonanywhere.com/json/jsonev/?callback=?"
+//   // var local_url="http://localhost:8000/json/jsonev/"
+
+//   //verificacion cookie!
+//   $.getJSON(url2, function(json) {
+//       $("#templates").load("templates/template-event.html",function(){
+//           $.each(json, function(key,val) {
+//             var template = $('#template3').html();
+//             var html = Mustache.to_html(template, val);
+//             $('#template33').append(html);
+//           });
+//           a=$('#containerr').html();
+          
+//           $('.section').html(a).trigger('create');
+//       });
+      
+
+//     });
+// }
+
+
+// function proximos_eventos(){
+//   var url2 = urls + "/json/jsonev/?callback=?"
+//   // var url="http://pietreal.herokuapp.com/json/jsonev/?callback=?"//url de proximos!!
+//   // var local_url="http://localhost:8000/json/jsonev/?callback=?"
+//       //dar id, nombre y descripcion!!!
+//   $.getJSON(url2, function(json) {
+//       $("#templates").load("templates/template-event.html",function(){
+//           $.each(json, function(key,val) {
+//             var template = $('#template3').html();
+//             var html = Mustache.to_html(template, val);
+//             $('#template33').append(html);
+//           });
+//           a=$('#containerr').html();
+          
+//           $('.section').html(a).trigger('create');
+//       });
+      
+// >>>>>>> ca6e2863bba8f7ce37dd4842f4f15202b5776691
 
 }
 
