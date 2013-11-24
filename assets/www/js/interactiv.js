@@ -273,7 +273,7 @@ $(document).on("click","#resolv",function(e){
         idpregu = 1
         pregfinal(idtem,a_href,idpregu);
         $.mobile.changePage( $(a_href), "flip", true, true);
-        
+
         return false;
       });
   $(document).on( "click","#resolvn",function(event)
@@ -289,7 +289,7 @@ $(document).on("click","#resolv",function(e){
               var choiceqf = $('input:radio[name=radio-choicef]:checked').val();      //ALTERNATIVA
 
               //alert(quest);
-              alert(choiceqf);
+              //alert(choiceqf);
               $.ajax({
                     type: "GET",
                     dataType: "json",
@@ -332,7 +332,7 @@ $(document).on("click","#resolvf",function(e){        //control de botones......
         var choiceqf = $('input:radio[name=radio-choicef]:checked').val();      //ALTERNATIVA
 
         //alert(quest);
-        alert(choiceqf);
+        //alert(choiceqf);
         $.ajax({
               type: "GET",
               dataType: "json",
