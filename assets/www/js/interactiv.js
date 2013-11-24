@@ -28,7 +28,7 @@ var url="http://localhost:8000";
 
 // click en particip y en autenticar..................entro y pasar a pregus
 $(document).on("click","#particip, #particip2",function(e){
-        alert("CLICK");
+        //alert("CLICK");
           var entro= 0;
            var auth = 0;
           
@@ -51,12 +51,12 @@ $(document).on("click","#particip, #particip2",function(e){
 
 
 function validarauthentici(entro,auth,idauthev,codeven,temid,appl){
-
-          cokey="codigo"+codeven+"";
+          //alert("codigoooo!")
+          //cokey="codigo"+codeven+"";
           //idauthev = window.localStorage.getItem("codigo"+codeven+"");
           authcodes = new Array();
           authcodes = JSON.parse(window.localStorage.getItem("codigosuser"));
-          alert("es tipo");
+          //alert("es tipo");
           $.each( authcodes, function( key, value ) {
             $.each( value, function( key, value ) {   //revisar existencia en arreglo storage!
               if (value == codeven){
@@ -68,7 +68,7 @@ function validarauthentici(entro,auth,idauthev,codeven,temid,appl){
 
             });
           });
-          alert(JSON.stringify(authcodes));
+          //alert(JSON.stringify(authcodes));
           
           /*
             logica de estas funciones:
@@ -110,7 +110,6 @@ function validarauthentici(entro,auth,idauthev,codeven,temid,appl){
 
             });
           });
-          /*datukooooo*/
 
           //alert(idauthev2);
           // if ( $.isNumeric(idauthev2)){   //no es y es numero la session:1
@@ -269,10 +268,12 @@ $(document).on("click","#resolv",function(e){
       {
         a_href = $(this).attr('href');
         idtem = $(this).attr('data-tem');
+
         window.localStorage.setItem("pregufin", 1);
         idpregu = 1
         pregfinal(idtem,a_href,idpregu);
         $.mobile.changePage( $(a_href), "flip", true, true);
+        
         return false;
       });
   $(document).on( "click","#resolvn",function(event)
@@ -280,51 +281,86 @@ $(document).on("click","#resolv",function(e){
         
         a_href = $(this).attr('href');
         idtem = $(this).attr('data-tem');
-        var idpregufin = parseInt(window.localStorage.getItem("pregufin"));
-        idpregufin += 1
-        window.localStorage.setItem("pregufin", idpregufin);
-        pregfinal(idtem,a_href, idpregufin);
 
-        $.mobile.changePage( $(a_href), "flip", true, true);
-        
-        return false;
+
+        var eventu = $(this).attr('data-tem');                  //EVENTO
+        var quest=$('#templatefinal>fieldset').attr('id');                //PREGUNTA
+        if ($('input[name=radio-choicef]').is(':checked')){
+              var choiceqf = $('input:radio[name=radio-choicef]:checked').val();      //ALTERNATIVA
+
+              //alert(quest);
+              alert(choiceqf);
+              $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: url +"/interactiv/resolvf",
+                    data: { 'fchoice': choiceqf,
+                      'fquest':quest,
+                      'evnf': eventu},
+                      beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
+                     complete: function() { $.mobile.hidePageLoadingMsg() },
+                    success: function(response){
+
+
+                        var idpregufin = parseInt(window.localStorage.getItem("pregufin"));
+                        idpregufin += 1
+                        window.localStorage.setItem("pregufin", idpregufin);
+                        pregfinal(idtem,a_href, idpregufin);
+
+                        $.mobile.changePage( $(a_href), "flip", true, true);
+                 },
+                      error: function (xhr, ajaxOptions, thrownError) {
+                      alert(xhr.responseText);
+                      alert(thrownError);
+                      alert('error');
+                  }
+                  });
+                //window.location.replace("evento1-interactiv-t1.html");
+          }else{
+            alert('not checked');
+            var radio_value=0;
+          }
       });
-$(document).on("click","#resolvf",function(e){
-  // //alert('hello');
-  // //alert($('input[name=radio-choicef]:checked').val());
-  // var quest=$('fieldset').attr('id');
-  // if ($('input[name=radio-choicef]').is(':checked')){
-  //       var rad_val = $('input:radio[name=radio-choicef]:checked').val();
 
-  //       //alert(quest);
-  //       //alert(rad_val);
-  //       $.ajax({
-  //             type: "GET",
-  //             dataType: "json",
-  //             url: url +"/interactiv/resolv",
-  //             data: { 'send_resul': rad_val,
-  //               'quest':quest},
-  //               beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
-  //              complete: function() { $.mobile.hidePageLoadingMsg() },
-  //             success: function(response){
-  //                 alert('Gracias');
-  //                 //particip();
+
+$(document).on("click","#resolvf",function(e){        //control de botones...........revisar estoooo!!!!
+  //alert('hello');
+  //alert($('input[name=radio-choicef]:checked').val());
+  var eventu = $(this).attr('data-tem');                  //EVENTO
+  var quest=$('#templatefinal>fieldset').attr('id');                //PREGUNTA
+  if ($('input[name=radio-choicef]').is(':checked')){
+        var choiceqf = $('input:radio[name=radio-choicef]:checked').val();      //ALTERNATIVA
+
+        //alert(quest);
+        alert(choiceqf);
+        $.ajax({
+              type: "GET",
+              dataType: "json",
+              url: url +"/interactiv/resolvf",
+              data: { 'fchoice': choiceqf,
+                'fquest':quest,
+                'evnf': eventu},
+                beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
+               complete: function() { $.mobile.hidePageLoadingMsg() },
+              success: function(response){
+                  alert('Gracias');
+                  //particip();
                   window.localStorage.removeItem("pregufin");
                   $.mobile.changePage( "#oneevent", "flip", true, true);
 
-              // },
-              // error: function (xhr, ajaxOptions, thrownError) {
-              // alert(xhr.responseText);
-              // alert(thrownError);
-              // alert('error');
-    //       }
-    //       });
-    //       //window.location.replace("evento1-interactiv-t1.html");
-    // }else{
-    //   alert('not checked');
-    //   var radio_value=0;
-    // }
-    return false;
+              },
+              error: function (xhr, ajaxOptions, thrownError) {
+              alert(xhr.responseText);
+              alert(thrownError);
+              alert('error');
+          }
+          });
+          //window.location.replace("evento1-interactiv-t1.html");
+    }else{
+      alert('not checked');
+      var radio_value=0;
+    }
+    //return false;
 });
 
 
@@ -394,6 +430,10 @@ function pregfinal(cod, a_href,preguid){
 
                   
                   $tochange.html(b).trigger('create');
+                  //checkar si existe el primero.... luego checkar si existe segundo, etc!
+                  $('#fencuesta').attr('data-tem',cod);
+                  $('#resolvn').attr('data-tem',cod);
+                  $('#resolvf').attr('data-tem',cod);
                   validendenc(preguid);
                   //titulo = headertitulofinal
                 });
